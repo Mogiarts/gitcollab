@@ -49,4 +49,13 @@ public class EnemySpawner : MonoBehaviour
         thisEnemy = Instantiate(_enemyToSpawn, spawnPositions[Random.Range(0, 7)].position, Quaternion.identity);
         _enemiesList.Add(thisEnemy);
     }
+
+    public void DeleteEnemies()
+    {
+        foreach (GameObject item in _enemiesList)
+        {
+            Destroy(item.gameObject);
+        }
+        _enemiesList.Clear();
+    }
 }

@@ -7,36 +7,77 @@ public class GameManager : MonoBehaviour
 {
     public static GameManager Instance { get; private set; }
 
-    private GameState _gameState;
+    public GameState gameState;
+
+    private bool _executePlayingOnce = true;
+    private bool _executeMenuOnce = true;
+    private bool _executeDeathOnce = true;
 
     private void Awake()
     {
         Instance = this;
-        _gameState = GameState.InGame;
+        gameState = GameState.MainMenu;
     }
 
     private void Update()
     {
-        switch (_gameState)
+        if (Input.GetKeyDown(KeyCode.A))
+        {
+            if (gameState == GameState.InGame)
+            {
+                gameState = GameState.GameOver;
+            }
+        }
+        
+        switch (gameState)
         {
             case GameState.MainMenu:
+                if (_executeMenuOnce)
+                {
+                    ExecuteMenu();
+                    _executeMenuOnce = false;
+                }
                 break;
             case GameState.InGame:
-                
+                if (_executePlayingOnce)
+                {
+                    ExecutePlaying();
+                    _executePlayingOnce = false;
+                }
                 break;
             case GameState.GameOver:
+                if (_executeDeathOnce)
+                {
+                    ExecuteDeath();
+                    _executeDeathOnce = false;
+                }
                 break;
             default:
                 break;
         }
     }
 
+    private void ExecuteMenu()
+    {
+        _executePlayingOnce = true;
+    }
+
     private void ExecutePlaying()
     {
+        _executeDeathOnce = true;
         EnemySpawner.Instance.shouldSpawnEnemies = true;
     }
+
+    private void ExecuteDeath()
+    {
+        _executeMenuOnce = true;
+        EnemySpawner.Instance.shouldSpawnEnemies = false;
+        EnemySpawner.Instance.DeleteEnemies();
+        CanvasManager.Instance.gameCanvas.SetActive(false);
+        CanvasManager.Instance.deathCanvas.SetActive(true);
+    }
     
-    private enum GameState
+    public enum GameState
     {
         MainMenu,
         InGame,
