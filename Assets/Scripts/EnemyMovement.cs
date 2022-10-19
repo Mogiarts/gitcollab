@@ -6,11 +6,16 @@ using UnityEngine.UIElements;
 public class EnemyMovement : MonoBehaviour
 {
 
-    public Transform target;
+    GameObject target;
     public float speed = 3f;
+
+    private void Awake()
+    {
+        target = GameObject.FindGameObjectWithTag("Player");     
+    }
 
     private void FixedUpdate()
     {
-        transform.Translate((target.position - transform.position).normalized * speed * Time.deltaTime);
+        transform.Translate((target.transform.position - transform.position).normalized * speed * Time.deltaTime);
     }
 }
