@@ -17,6 +17,7 @@ public class Bullets : MonoBehaviour
         if (enemy.CompareTag("Enemy"))
         {
             Destroy(enemy.gameObject);
+            Destroy(gameObject);
         }
     }
     public void Shoot(Vector3 direction)
