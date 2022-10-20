@@ -31,6 +31,7 @@ public class CanvasManager : MonoBehaviour
     public void UpdateGameScore(int score)
     {
         scoreText.text = "Score: " + score;
+        GetHighestScore(score);
     }
 
     public void MainMenuButton()
@@ -49,7 +50,15 @@ public class CanvasManager : MonoBehaviour
 
     public void DisplayDeathScores(int a, int b)
     {
-        sessionScore.text = a.ToString();
-        highestScore.text = b.ToString();    
+        sessionScore.text = "Score: " + a.ToString();
+        highestScore.text = "Highest score:" + b.ToString();    
+    }
+
+    public void GetHighestScore(int sessionScore)
+    {
+        if (PlayerPrefs.GetInt("highestScore") < sessionScore)
+        {
+            PlayerPrefs.SetInt("highestScore", sessionScore);
+        }
     }
 }

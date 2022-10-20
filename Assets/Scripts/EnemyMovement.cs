@@ -7,7 +7,7 @@ public class EnemyMovement : MonoBehaviour
 {
 
     GameObject target;
-    public float speed = 3f;
+    public float speed = 15f;
 
     private void Awake()
     {
@@ -16,6 +16,14 @@ public class EnemyMovement : MonoBehaviour
 
     private void FixedUpdate()
     {
-        transform.Translate((target.transform.position - transform.position).normalized * speed * Time.deltaTime);
+        transform.Translate((target.transform.position - transform.position) * speed * Time.deltaTime);
+    }
+
+    private void OnTriggerEnter2D(Collider2D collision)
+    {
+        if (collision.gameObject.CompareTag("Player"))
+        {
+            GameManager.Instance.gameState = GameManager.GameState.GameOver;
+        }
     }
 }

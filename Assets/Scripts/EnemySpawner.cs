@@ -12,7 +12,7 @@ public class EnemySpawner : MonoBehaviour
     public bool shouldSpawnEnemies = false;
 
     private List<GameObject> _enemiesList;
-    private int _spawnInterval = 2;
+    private float _spawnInterval = 1.3f;
     private float _elapsedTime;
 
 
@@ -40,7 +40,6 @@ public class EnemySpawner : MonoBehaviour
                 _elapsedTime = 0;
             }
         }
-        Debug.Log(_elapsedTime);
     }
 
     private void SpawnEnemy()

@@ -16,6 +16,7 @@ public class Bullets : MonoBehaviour
     {
         if (enemy.CompareTag("Enemy"))
         {
+            GameManager.Instance.AddScore();
             Destroy(enemy.gameObject);
             Destroy(gameObject);
         }
@@ -23,6 +24,6 @@ public class Bullets : MonoBehaviour
     public void Shoot(Vector3 direction)
     {
         //transform.Translate(direction.normalized * Time.deltaTime * 5);
-        rb.velocity = direction.normalized * 5;
+        rb.velocity = direction.normalized * 13;
     }
 }
