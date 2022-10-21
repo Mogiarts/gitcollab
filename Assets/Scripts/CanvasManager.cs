@@ -54,6 +54,11 @@ public class CanvasManager : MonoBehaviour
         highestScore.text = "Highest score:" + b.ToString();    
     }
 
+    public void ResetPlayerPrefs()
+    {
+        PlayerPrefs.DeleteAll();
+    }
+
     public void GetHighestScore(int sessionScore)
     {
         if (PlayerPrefs.GetInt("highestScore") < sessionScore)
