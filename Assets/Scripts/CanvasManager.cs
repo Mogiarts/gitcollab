@@ -59,6 +59,11 @@ public class CanvasManager : MonoBehaviour
         PlayerPrefs.DeleteAll();
     }
 
+    public void Quit()
+    {
+        Application.Quit();
+    }
+
     public void GetHighestScore(int sessionScore)
     {
         if (PlayerPrefs.GetInt("highestScore") < sessionScore)
